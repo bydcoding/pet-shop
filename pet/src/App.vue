@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <Header />
+    <carousel />
     <router-view /> <!-- 用來顯示當前頁面 -->
 
   </div>
 </template>
 
-<script>
+<script setup>
 import Header from './components/header.vue';
-export default {
-  name: 'App',
-  components: {
-    Header
-  }
-}
+import carousel from './components/carousel.vue';
+
+
 </script>
 
 <style>
