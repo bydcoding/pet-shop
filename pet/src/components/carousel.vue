@@ -19,8 +19,11 @@ import { reactive, ref, onMounted, onUnmounted, computed, nextTick } from "vue"
 defineOptions({ name: 'Carousel' })
 const items = ref([]);
 const itemWidth = ref(0);
-const index = ref(0);
+const index = ref(0); //這個value是多少就決定哪一張圖片在最左邊，ex: 0=> banner-01.png
 const banner = reactive([]);
+const displayBanner = ref(3);//控制當前媒體顯示幾張圖片
+
+const updateDisplayBanner = () => displayBanner.value = window.innerWidth <= 768 ? 1 : 3;
 
 
 const computeItemWidth = () => {
@@ -32,6 +35,10 @@ const computeItemWidth = () => {
     })
 }
 
+const handleResize = () => {
+    updateDisplayBanner();
+    computeItemWidth();
+}
 
 const trackStyle = computed(() => {
     return {
@@ -49,25 +56,29 @@ onMounted(() => {
         banner.push("/carousel/banner-05.png")
         banner.push("/carousel/banner-06.png")
         computeItemWidth();
-        window.addEventListener('resize', computeItemWidth)
+        updateDisplayBanner();
+        window.addEventListener('resize', handleResize)
     }, 300)
 
 })
 onUnmounted(() => {
-    window.removeEventListener("resize", computeItemWidth);
+    window.removeEventListener("resize", handleResize);
 });
 
 
 
+const lastIndex = computed(() => {
+    return Math.max(banner.length - displayBanner.value, 0);
+})
 
 
 let back = () => {
     index.value -= 1
-    if (index.value < 0) index.value = banner.length - 3
+    if (index.value < 0) index.value = lastIndex.value;
 };
 let next = () => {
     index.value++
-    if (index.value > banner.length - 3) index.value = 0
+    if (index.value > lastIndex.value) index.value = 0
 };
 
 </script>
@@ -111,10 +122,30 @@ let next = () => {
         border: none;
         background-color: transparent;
         position: absolute;
+        font-size: xx-large;
+        cursor: pointer;
     }
 
     .next {
         right: 0;
+        top: 50%
     }
+
+    .back {
+        top: 50%
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        .viewport {
+            .track {
+                .img-container {
+                    width: 100vw;
+                }
+            }
+        }
+    }
+
 }
 </style>

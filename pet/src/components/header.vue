@@ -86,6 +86,8 @@ defineOptions({ name: 'Header' })
     .header {
         flex-direction: column;
         align-items: start;
+        height: auto;
+        padding: 10px;
 
         .burger {
             display: flex;
@@ -96,7 +98,7 @@ defineOptions({ name: 'Header' })
         }
 
         .menu {
-            position: absolute;
+            position: static;
             display: none;
             flex-direction: column;
             width: 100vw;
@@ -105,7 +107,7 @@ defineOptions({ name: 'Header' })
             left: 0;
             align-items: start;
             background-color: #8CD62A;
-            ;
+
         }
 
         .active {
