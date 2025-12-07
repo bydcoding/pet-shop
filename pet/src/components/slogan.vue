@@ -33,7 +33,8 @@ defineOptions({ name: "slogan" })
 
 <style lang="scss" scoped>
 .container {
-    width: 60%;
+    width: 100vw;
+    background-color: #F0FADD;
 
     .layout {
         display: flex;

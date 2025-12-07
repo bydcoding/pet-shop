@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <Header />
-    <carousel />
-    <slogan />
+    <Header v-if="showHeader" />
 
     <router-view /> <!-- 用來顯示當前頁面 -->
 
@@ -11,8 +9,10 @@
 
 <script setup>
 import Header from './components/header.vue';
-import carousel from './components/carousel.vue';
-import slogan from './components/slogan.vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const showHeader = computed(() => route.path !== "/login")
 
 </script>
 

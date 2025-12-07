@@ -19,7 +19,16 @@
     </div>
 </template>
 
-<script>
+
+<script setup>
+const props = defineProps({
+    product: {
+        type: Object,
+        required: true
+    }
+})
+</script>
+<!-- <script>
 export default {
     name: "GoodsCard",
     props: {
@@ -33,7 +42,7 @@ export default {
         return {}
     }
 }
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 .card-container {
