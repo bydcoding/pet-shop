@@ -6,11 +6,16 @@
                 <span></span>
             </button>
             <img src="/icon/pet_icon.png" alt="LOGO">
-            <ul class="menu" :class="{ active: isOpen }">
-                <li>最新消息</li>
-                <li>商城</li>
-                <li>寵物住宿</li>
-            </ul>
+            <div class="option-container" :class="{ active: isOpen }">
+                <ul class="menu">
+                    <li>最新消息</li>
+                    <li>商城</li>
+                    <li>寵物住宿</li>
+                </ul>
+                <ul class="login">
+                    <li>登入</li>
+                </ul>
+            </div>
         </header>
     </template>
 
@@ -60,25 +65,34 @@ defineOptions({ name: 'Header' })
     img {
         height: 100%;
     }
-}
 
-.menu {
-
-    display: flex;
-    width: 50vw;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    gap: 10%;
-
-    li {
-        cursor: pointer;
-        display: inline-block;
-        padding: 8px 16px;
+    .option-container {
+        display: flex;
     }
 
-    li:hover {
-        color: white;
+
+    .menu {
+
+        display: flex;
+        width: 50vw;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        gap: 10%;
+
+        li {
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 16px;
+        }
+
+        li:hover {
+            color: white;
+        }
+    }
+
+    .login>li {
+        padding-left: 16px;
     }
 }
 
@@ -97,21 +111,36 @@ defineOptions({ name: 'Header' })
             display: none;
         }
 
-        .menu {
-            position: static;
-            display: none;
+        .option-container {
+            display: flex;
             flex-direction: column;
-            width: 100vw;
-            // padding: 0;
-            top: 100%;
-            left: 0;
-            align-items: start;
-            background-color: #8CD62A;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            max-height: 0;
 
+            .menu {
+                position: static;
+                display: flex;
+                flex-direction: column;
+                width: 100vw;
+                // padding: 0;
+                top: 100%;
+                left: 0;
+                align-items: start;
+                background-color: #8CD62A;
+
+            }
+
+
+
+            .active {
+                display: flex;
+            }
         }
 
-        .active {
-            display: flex;
+        .option-container.active {
+            transform: translateY(0);
+            max-height: 300px;
         }
     }
 }
