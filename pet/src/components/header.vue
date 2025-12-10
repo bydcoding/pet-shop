@@ -13,7 +13,12 @@
                     <li>寵物住宿</li>
                 </ul>
                 <ul class="login">
-                    <li>登入</li>
+                    <li>
+                        <router-link to="/login">
+                            登入
+                        </router-link>
+                    </li>
+
                 </ul>
             </div>
         </header>
@@ -34,6 +39,11 @@ defineOptions({ name: 'Header' })
     margin: 0;
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+}
+
 
 .header {
     position: relative;
@@ -89,6 +99,11 @@ defineOptions({ name: 'Header' })
         li:hover {
             color: white;
         }
+    }
+
+    .login {
+        display: flex;
+        align-items: center;
     }
 
     .login>li {

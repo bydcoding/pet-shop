@@ -1,5 +1,6 @@
 <template>
     <section>
+        <div class="mask"></div>
         <div class="container">
             <img src="/icon/pet_icon.png" alt="寵物icon" class="icon">
             <p>歡迎回來</p>
@@ -33,13 +34,25 @@ const controlSubmit = (e) => e.preventDefault();
 <style lang="scss" scoped>
 section {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
+    width: 100vw;
     height: 100vh;
+    background-image: url("/background/cat.jpg");
+    background-size: contain;
 
 
+    .mask {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.6);
+        z-index: 0;
+    }
 
     .container {
+        z-index: 1;
+
         .icon {
             width: 100px;
             height: 100px;
@@ -79,6 +92,11 @@ section {
             width: 100%;
             border-radius: 5px;
             border: gray;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            background-color: #f3f4f6;
         }
 
         span {
