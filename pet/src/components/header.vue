@@ -13,24 +13,28 @@
                     <li>寵物住宿</li>
                 </ul>
                 <ul class="login">
-                    <li>
+                    <li v-if="user.isLogin">
                         <router-link to="/login">
                             登入
                         </router-link>
                     </li>
-
+                    <button @click="logout">測試用登出</button>
+                    <li>{{ user.userName }}</li>
                 </ul>
             </div>
         </header>
     </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useUser } from "../store/user";
+defineOptions({ name: 'Header' })
 const isOpen = ref(false)
+const user = useUser();
+const logout = user.logout; //測試用
 function openMenu() {
     isOpen.value = !isOpen.value
 }
-defineOptions({ name: 'Header' })
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +64,7 @@ a {
         background: transparent;
         width: 30vw;
         height: 32px;
+        padding-left: 10px;
         flex-direction: column;
         justify-content: space-between;
         border: none;

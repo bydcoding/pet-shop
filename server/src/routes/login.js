@@ -1,6 +1,7 @@
 import express from "express";
 import pool from "../db.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -14,17 +15,24 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-    const [rows] = await pool.query(
-      "SELECT * FROM user WHERE account = ? AND password = ?",
-      [account, password]
-    );
+    const [rows] = await pool.query("SELECT * FROM users WHERE account = ?", [
+      account,
+    ]);
     if (rows.length == 0)
-      return res.status(401).json({ ok: false, error: "帳號或密碼錯誤" });
-    const user = rows[0];
+      return res.status(401).json({ ok: false, error: "帳號或密碼錯誤0" });
+    const users = rows[0];
+
+    const passwordMatch = await bcrypt.compare(password, users.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ ok: false, error: "帳號或密碼錯誤1" });
+    }
+
     const payload = {
-      id: user.user_id,
-      account: user.account,
-      role: user.role,
+      id: users.user_id,
+      name: users.name,
+      account: users.account,
+      role: users.role,
     };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
     return res.status(201).json({
