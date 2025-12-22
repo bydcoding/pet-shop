@@ -44,7 +44,7 @@ defineOptions({ name: "slogan" })
         figure {
 
             img {
-                width: 300px;
+                width: 100%;
                 height: 300px;
             }
 

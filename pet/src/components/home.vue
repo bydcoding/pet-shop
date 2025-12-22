@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="content">
 
         <carousel />
         <slogan />
+        <cardList />
     </div>
 </template>
 
@@ -10,6 +11,13 @@
 
 import carousel from './carousel.vue';
 import slogan from './slogan.vue';
+import cardList from './cardList.vue';
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+</style>
